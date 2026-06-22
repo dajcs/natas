@@ -239,3 +239,286 @@ Background color: <input name=bgcolor value="<?=$data['bgcolor']?>">
 <input type=submit value="Set color">
 </form>
 ```
+
+Here is the code with comments added.
+> **Note!!!**: The website has a code in `index.php`, that we can't see. The code what we can see at `index-source.html` is "reflecting" the original code (the one processed by the webserver) at `index.php` with small differences:
+- `$key = '<censored>;'` # this means the encryption key is censored, it is not shown to us, the original code is likely something `$key = "abcde";`
+- `print "The password for natas12 is <censored><br>";` here again the real code would print the password for natas12 level, but this password is hidden from us, otherwise there would be no challenge
+
+```php
+<?
+
+// 1. THE DEFAULT STATE
+// Visiting the site for the very first time, this is the default data used.
+// "showpassword" is set to "no". 
+// Changing it to "yes" might help to reveal the censored natas12 password
+$defaultdata = array("showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+
+// 2. THE ENCRYPTION/DECRYPTION FUNCTION
+// This function takes text and scrambles it using XOR bitwise math.
+// Because of how XOR math works, running text through this function scrambles it,
+// and running the scrambled text through the EXACT SAME function unscrambles it.
+function xor_encrypt($in) {
+    // The real "encryption" key is hidden from us
+    $key = '<censored>'; 
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character of the input string one by one
+    for($i=0; $i<strlen($text); $i++) {
+        // $text[$i] gets the current character of the input.
+        // $key[$i % strlen($key)] loops through the key. If the text is longer than 
+        // the key, the modulo operator (%) forces the key to repeat (e.g., eDWoeDWoqw...).
+        // The '^' operator performs the XOR math between the two characters.
+        $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+
+// 3. READING THE COOKIE
+// This function checks if we already have a cookie 
+// if we have a valid cookie, decoding will lead to a JOSN in form of
+// {"showpassword"=>"x", "bgcolor"=>"#abcdef"}
+// and we'll replace and return the defaultdata set to values from the cookie
+function loadData($def) {
+    global $_COOKIE; // Pull in the browser's cookies
+    $mydata = $def;  // Start with the default data (function called with $defaultdata)
+
+    // Does the browser have a cookie named "data"?
+    if(array_key_exists("data", $_COOKIE)) {
+        
+        // This is the Decryption Pipeline (read from inside-out):
+        // 1. base64_decode: Converts the cookie from safe text back into raw binary bytes.
+        // 2. xor_encrypt: XORs the binary against the secret key to unscramble it.
+        // 3. json_decode(..., true): Converts the JSON string back into a PHP array.
+        $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
+        
+        // Security check: Make sure the decrypted data is an array AND has the right keys.
+        if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata)) {
+            
+            // Regex check: Ensure the color is a valid 6-character hex code (e.g., #ffffff).
+            if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor'])) {
+                
+                // If everything is valid, overwrite the default data with the cookie's data!
+                $mydata['showpassword'] = $tempdata['showpassword'];
+                $mydata['bgcolor'] = $tempdata['bgcolor'];
+            }
+        }
+    }
+    return $mydata; // Return the final array
+}
+
+
+// 4. SAVING THE COOKIE
+// This function takes a PHP array and packages it into a secure cookie.
+function saveData($d) {
+    // This is the Encryption Pipeline (read from inside-out):
+    // 1. json_encode: Converts the PHP array into a JSON string: {"showpassword":"no"...}
+    // 2. xor_encrypt: Scrambles the JSON string using the secret key.
+    // 3. base64_encode: Converts the scrambled binary into safe letters/numbers so it 
+    //    can be sent over the internet as a HTTP cookie without breaking.
+    // 4. setcookie: Tells to the browser to save it.
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+
+// ---------------------------------------------
+// MAIN SCRIPT EXECUTION STARTS HERE
+// ---------------------------------------------
+
+// Step A: Load the data 
+// (use defaults or if there is a valid cookie take the values from there).
+$data = loadData($defaultdata);
+
+// Step B: Did the user just submit the background color form?
+if(array_key_exists("bgcolor", $_REQUEST)) {
+    // Make sure the input is a valid hex color code
+    if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor'])) {
+        // Update the array with the new color the user requested
+        $data['bgcolor'] = $_REQUEST['bgcolor'];
+    }
+}
+
+// Step C: Save the updated array back to the user's browser as a cookie.
+saveData($data);
+
+?>
+
+<!-- 5. THE HTML WEBPAGE -->
+<h1>natas11</h1>
+<div id="content">
+
+<!-- The <?= ?> tag is a shortcut for <?php echo ... ?> -->
+<!-- It injects the background color from our array directly into the CSS -->
+<body style="background: <?=$data['bgcolor']?>;">
+Cookies are protected with XOR encryption<br/><br/>
+
+<?
+// THE ULTIMATE GOAL:
+// If the array we loaded from the cookie says "yes", it prints the password!
+if($data["showpassword"] == "yes") {
+    print "The password for natas12 is <censored><br>";
+}
+
+?>
+
+<form>
+<!-- Keep the current color in the text box so the user sees it -->
+Background color: <input name=bgcolor value="<?=$data['bgcolor']?>">
+<input type=submit value="Set color">
+</form>
+
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+</div>
+</body>
+</html>
+```
+
+## Cokie structure
+
+The saved cookie:
+
+```bash
+cat cookie.txt
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+
+natas11.natas.labs.overthewire.org      FALSE   /       FALSE   0       data    HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D
+```
+
+This is the classic **Netscape HTTP Cookie File** format. It was created by Netscape Navigator in the 1990s, and tools like `curl` and `wget` still use it today to store and read cookies. 
+
+It is a simple, **tab-separated** text file. There are 7 columns:
+
+`natas11.natas.labs.overthewire.org`  |  `FALSE`  |  `/`  |  `FALSE`  |  `0`  |  `data`  |  `HmYkBwo...%3D`
+
+This is what each column represents from left to right:
+
+### 1. Domain (`natas11.natas.labs.overthewire.org`)
+The website domain that created the cookie. `curl` uses this to know which website it should send the cookie back to. It will only send this cookie to Natas 11.
+
+### 2. Include Subdomains (`FALSE`)
+This is a True/False flag. If it is `TRUE`, `curl` will send the cookie to all subdomains (like `api.natas11...`). Since it is `FALSE`, `curl` will only send it to the exact domain listed in Column 1.
+
+### 3. Path (`/`)
+The directory on the server where the cookie is valid. `/` means the cookie is valid for the entire website. If it said `/admin/`, `curl` would only send the cookie if requested a URL starting with `http://natas11.../admin/`.
+
+### 4. Secure (`FALSE`)
+This is a True/False flag that indicates if the cookie should **only** be sent over encrypted HTTPS connections. Because Natas uses regular HTTP, this flag is `FALSE`. If it were `TRUE`, `curl` would refuse to send the cookie over unencrypted HTTP.
+
+### 5. Expiration (`0`)
+This is the Unix timestamp (seconds since Jan 1, 1970) for when the cookie expires and should be deleted. 
+A value of **`0`** means it is a **Session Cookie**. It doesn't have a specific expiration date; it is designed to expire immediately as soon as the web browser is closed (or when the `curl` command finishes, but saving it to a file keeps it alive).
+
+### 6. Name (`data`)
+The name of the variable. When `curl` sends this to the server, PHP receives it inside its array as `$_COOKIE["data"]`.
+
+### 7. Value (`HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D`)
+The actual content of the cookie! 
+*(Note: The `%3D` at the end is just the URL-encoded version of the equals sign `=` used for Base64 padding).*
+
+---
+
+### How to use this for the exploit:
+
+We can delete the old value in Column 7, paste the forged "malicious" cookie value in its place, and save it. 
+
+Then, we can tell `curl` to read that file using the `-b` flag:
+```bash
+curl -s -u natas11:<password> -b cookie.txt http://natas11.natas.labs.overthewire.org
+```
+
+
+
+
+
+### The Vulnerability (The XOR Flaw)
+
+When you visiting the page normally, the server takes this default array:
+`array("showpassword"=>"no", "bgcolor"=>"#ffffff")`
+
+It turns it into a JSON string:
+`{"showpassword":"no","bgcolor":"#ffffff"}`
+
+Then, it encrypts it using this function:
+```php
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+    for($i=0;$i<strlen($text);$i++) {
+        $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+    return $outText;
+}
+```
+
+**The flaw with XOR (`^`) encryption:**
+* If `Plaintext ⊕ Key = Ciphertext`
+* Then `Ciphertext ⊕ Plaintext = Key`
+
+Because we know the **Ciphertext** (the cookie the server sent us) AND we know the **Plaintext** (the default JSON string), we can XOR them together to reveal the server's  `<censored>` key!
+
+### Step 1: Find the Secret Key
+
+Running a quick PHP script to XOR the cookie and the default JSON string together. 
+
+*Note: In the `curl` output, the cookie ended in `%3D`. That is just URL-encoding for `=` (needed for base64 padding). The actual Base64 string is `HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=`*
+
+XOR the cookie and JSON:
+
+```bash
+php -r '
+$cookie = base64_decode("HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=");
+$plaintext = json_encode(array("showpassword"=>"no", "bgcolor"=>"#ffffff"));
+$key = "";
+for($i=0; $i<strlen($plaintext); $i++) {
+    $key .= $cookie[$i] ^ $plaintext[$i];
+}
+print("The leaked key is: " . $key . "\n");
+'
+
+# The leaked key is: eDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoe
+```
+
+The output : `eDWoeDWoeDWoeDWoeDWo...` means the secret key is just **`eDWo`** repeating over and over!
+
+### Step 2: Forge the Admin Cookie
+Now that we have the secret key (`eDWo`), we can encrypt our own data! 
+
+We want to tell the server: `{"showpassword":"yes","bgcolor":"#00ccdd"}`
+
+We will write another quick PHP one-liner to XOR our new text with the `eDWo` key, and Base64 encode it so it looks like a valid cookie:
+
+```bash
+php -r '
+$key = "eDWo";
+$target = json_encode(array("showpassword"=>"yes", "bgcolor"=>"#00ccdd"));
+$out = "";
+for($i=0; $i<strlen($target); $i++) {
+    $out .= $target[$i] ^ $key[$i % strlen($key)];
+}
+print("Forged Cookie: " . base64_encode($out) . "\n");
+'
+
+# Forged Cookie: HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5
+```
+
+The malicious data cookie (with trailing `=`):
+`HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5=`
+
+### Step 3: Send the Forged Cookie
+Now, you just need to send a standard `curl` request to the server, but provide your brand-new forged cookie using the `-b` (send cookie) flag instead of the `-c` (save cookie) flag:
+
+```bash
+curl -s -u natas11:UJdqkK1pTu6VLt9UHWAgRZz6sVUZ3lEk \
+-b "data=HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5=" \
+http://natas11.natas.labs.overthewire.org | grep -i "The password"
+
+The password for natas12 is yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB<br>
+```
+
