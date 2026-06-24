@@ -508,15 +508,15 @@ print("Forged Cookie: " . base64_encode($out) . "\n");
 # Forged Cookie: HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5
 ```
 
-The malicious data cookie (with trailing `=`):
-`HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5=`
+The malicious data cookie:
+`HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5`
 
 ### Step 3: Send the Forged Cookie
 Now, you just need to send a standard `curl` request to the server, but provide your brand-new forged cookie using the `-b` (send cookie) flag instead of the `-c` (save cookie) flag:
 
 ```bash
 curl -s -u natas11:UJdqkK1pTu6VLt9UHWAgRZz6sVUZ3lEk \
--b "data=HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5=" \
+-b "data=HmYkBwozJw4WNyAAFyB1VUc9MhxHaHUNAic4Awo2dVVHZ2dfBiczC0c5" \
 http://natas11.natas.labs.overthewire.org | grep -i "The password"
 
 The password for natas12 is yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB<br>
