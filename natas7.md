@@ -1,7 +1,7 @@
-### natas6 pswd: 0RoJwHdSKWFTYR5WuiAewauSuNaBXned
+### natas6 pswd: 7mhjtShJAcld2NYbKHEadnhEwRn2P8VT
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas6:0RoJwHdSKWFTYR5WuiAewauSuNaBXned@natas6.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas6:7mhjtShJAcld2NYbKHEadnhEwRn2P8VT@natas6.natas.labs.overthewire.org
 
 # * Host natas6.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
@@ -25,15 +25,6 @@ curl -v -s -c cookie.txt -X POST http://natas6:0RoJwHdSKWFTYR5WuiAewauSuNaBXned@
 # < Content-Type: text/html; charset=UTF-8
 # < 
 # <html>
-# <head>
-# <!-- This stuff in the header has nothing to do with the level -->
-# <link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
-# <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
-# <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
-# <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
-# <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
-# <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
-# <script>var wechallinfo = { "level": "natas6", "pass": "0RoJwHdSKWFTYR5WuiAewauSuNaBXned" };</script></head>
 # <body>
 # <h1>natas6</h1>
 # <div id="content">
@@ -83,12 +74,12 @@ Input secret: <input name=secret><br>
 </html>
 ```
 
-which uses `$secret` undefined variable.
+The php code uses `$secret` -- an undefined variable.
 
 Maybe the `includes/secret.inc` has the definition.
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas6:0RoJwHdSKWFTYR5WuiAewauSuNaBXned@natas6.natas.labs.overthewire.org/includes/secret.inc
+curl -v -s -c cookie.txt -X POST http://natas6:7mhjtShJAcld2NYbKHEadnhEwRn2P8VT@natas6.natas.labs.overthewire.org/includes/secret.inc
 #* Host natas6.natas.labs.overthewire.org:80 was resolved.
 #* IPv6: (none)
 #* IPv4: 13.53.215.123
@@ -121,7 +112,7 @@ $secret = "FOEIUWGHFEEUHOFUOIU";
 We can enter the secret on firefox, and we can check the POST request raw data, to see the format and to replicate it with curl:
 
 ```bash
-curl -v -s -c cookie.txt -d "secret=FOEIUWGHFEEUHOFUOIU&submit=Submit+Query" -X POST http://natas6:0RoJwHdSKWFTYR5WuiAewauSuNaBXned@natas6.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -d "secret=FOEIUWGHFEEUHOFUOIU&submit=Submit+Query" -X POST http://natas6:7mhjtShJAcld2NYbKHEadnhEwRn2P8VT@natas6.natas.labs.overthewire.org
 
 # Note: Unnecessary use of -X or --request, POST is already inferred.
 # * Host natas6.natas.labs.overthewire.org:80 was resolved.
@@ -156,12 +147,12 @@ curl -v -s -c cookie.txt -d "secret=FOEIUWGHFEEUHOFUOIU&submit=Submit+Query" -X 
 # <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
 # <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
 # <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
-# <script>var wechallinfo = { "level": "natas6", "pass": "0RoJwHdSKWFTYR5WuiAewauSuNaBXned" };</script></head>
+# <script>var wechallinfo = { "level": "natas6", "pass": "7mhjtShJAcld2NYbKHEadnhEwRn2P8VT" };</script></head>
 # <body>
 # <h1>natas6</h1>
 # <div id="content">
 # 
-  Access granted. The password for natas7 is bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
+Access granted. The password for natas7 is B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0
 # <form method=post>
 # Input secret: <input name=secret><br>
 # <input type=submit name=submit>

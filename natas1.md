@@ -17,8 +17,7 @@ curl -s -X POST  http://natas0:natas0@natas0.natas.labs.overthewire.org
 # <div id="content">
 # You can find the password for the next level on this page.
 # 
-<!--The password for natas1 is 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq -->
-# </div>
+<!--The password for natas1 is scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7 --># </div>
 # </body>
 # </html>
 
@@ -64,8 +63,7 @@ curl -s -X POST  http://natas0:natas0@natas0.natas.labs.overthewire.org -v
 # <div id="content">
 # You can find the password for the next level on this page.
 # 
-# <!--The password for natas1 is 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq -->
-# </div>
+# <!--The password for natas1 is scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7 --># </div>
 # </body>
 # </html>
 # 

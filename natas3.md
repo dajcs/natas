@@ -1,7 +1,7 @@
-### natas2 pswd: TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI
+### natas2 pswd: vsDOxoXyq3wckCP1ZmTZ71ngIA606odB
 
 ```bash
-curl -v -s -c cookie.txt -X POST http://natas2:TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI@natas2.natas.labs.overthewire.org
+curl -v -s -c cookie.txt -X POST http://natas2:vsDOxoXyq3wckCP1ZmTZ71ngIA606odB@natas2.natas.labs.overthewire.org
 
 # <h1>natas2</h1>
 # <div id="content">
@@ -15,7 +15,7 @@ There is a `files/pixel.png`.
 Let's have a look, maybe we discover something else in the `files` directory.
 
 ```bash
-curl -v -s  http://natas2:TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI@natas2.natas.labs.overthewire.org/files/ 
+curl -v -s  http://natas2:vsDOxoXyq3wckCP1ZmTZ71ngIA606odB@natas2.natas.labs.overthewire.org/files/ 
 # * Host natas2.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
 # * IPv4: 13.53.215.123
@@ -61,7 +61,7 @@ curl -v -s  http://natas2:TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI@natas2.natas.labs.ove
 That file `users.txt` looks interesting, let's have a look.
 
 ```bash
-curl -v -s  http://natas2:TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI@natas2.natas.labs.overthewire.org/files/users.txt
+curl -v -s  http://natas2:vsDOxoXyq3wckCP1ZmTZ71ngIA606odB@natas2.natas.labs.overthewire.org/files/users.txt
 # * Host natas2.natas.labs.overthewire.org:80 was resolved.
 # * IPv6: (none)
 # * IPv4: 13.53.215.123
@@ -90,7 +90,7 @@ curl -v -s  http://natas2:TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI@natas2.natas.labs.ove
 # alice:BYNdCesZqW
 # bob:jw2ueICLvT
 # charlie:G5vCxkVV3m
-  natas3:3gqisGdR0pjm6tpkDKdIWO2hSvchLeYH
+natas3:K30JrSRHzjxq3paUQuwozY4MNvmNFyhI
 # eve:zo4mJWyNj2
 # mallory:9urtcpzBmH
 # * Connection #0 to host natas2.natas.labs.overthewire.org:80 left intact
@@ -103,7 +103,7 @@ browsing for `/files/users.txt` from firefox we're getting the same
 alice:BYNdCesZqW
 bob:jw2ueICLvT
 charlie:G5vCxkVV3m
-natas3:3gqisGdR0pjm6tpkDKdIWO2hSvchLeYH
+natas3:K30JrSRHzjxq3paUQuwozY4MNvmNFyhI
 eve:zo4mJWyNj2
 mallory:9urtcpzBmH
 ```

